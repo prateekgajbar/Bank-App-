@@ -281,20 +281,6 @@ sudo docker compose restart nginx
 sudo docker compose down -v
 ```
 
----
-
-## 📋 API Documentation
-
-See [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) for all available endpoints.
-
----
-
-## 📄 Quick Start
-
-See [QUICK_START.md](./QUICK_START.md) for a step-by-step beginner guide.
-
----
-
 ## 👨‍💻 Author
 
 **Prateek Gajbar**
