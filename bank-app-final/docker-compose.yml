@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:5.0
+    container_name: bank-app-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    volumes:
+      - mongodb_data:/data/db
+
+  backend:
+    build:
+      context: ./bank-app-backend
+      dockerfile: Dockerfile
+    container_name: bank-app-backend
+    ports:
+      - "5000:5000"
+    environment:
+      MONGODB_URI: mongodb://admin:password123@mongodb:27017/bankapp?authSource=admin
+      PORT: 5000
+      JWT_SECRET: my-secret-key
+    depends_on:
+      - mongodb
+
+  frontend:
+    build:
+      context: ./bank-app-frontend
+      dockerfile: Dockerfile
+    container_name: bank-app-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  mongodb_data:
